@@ -23,33 +23,97 @@ let users = [
     },
 ];
 
-// GET request: Retrieve all users
 router.get("/",(req,res)=>{
-// Copy the code here
+    res.send(users);
 });
 
-// GET by specific ID request: Retrieve a single user with email ID
+
 router.get("/:email",(req,res)=>{
-// Copy the code here
-});
+    const email = req.params.email;
+    let filtered_users = users.filter((user) => user.email === email);
+    res.send(filtered_users);
+}); 
 
 
-// POST request: Create a new user
-router.post("/new/",(req,res)=>{
-// Copy the code here
-});
+router.post("/",(req,res)=>{
+    users.push({"firstName":req.query.firstName,"lastName":req.query.lastName,"email":req.query.email,"DOB":req.query.DOB});
+    res.send("The user" + (' ')+ (req.query.firstName) + " Has been added!")
+}); 
 
-
-// PUT request: Update the details of a user by email ID
 router.put("/:email", (req, res) => {
-// Copy the code here
+    const email = req.params.email;
+    let filtered_users = users.filter((user) => user.email === email);
+    if (filtered_users.length > 0) {
+        let filtered_user = filtered_users[0];
+        let DOB = req.query.DOB;
+        let firstName = req.query.firstName;
+        let lastName = req.query.lastName;
+        if(DOB) {
+            filtered_user.DOB = DOB
+        }
+        if(firstName) {
+            filtered_user.firstName = firstName
+        }
+        if(DOB) {
+            filtered_user.lastName = lastName
+        }
+        users = users.filter((user) => user.email != email);
+        users.push(filtered_user);
+        res.send(`User with the email  ${email} updated.`);
+    }
+    else{
+        res.send("Unable to find user!");
+    }
   });
 
 
-// DELETE request: Delete a user by email ID
 router.delete("/:email", (req, res) => {
-// Copy the code here
+    const email = req.params.email;
+    users = users.filter((user) => user.email != email);
+    res.send(`User with the email  ${email} deleted.`);
   });
+
+
+// JWT token generation
+// app.post("/user/generateToken", (req, res) => {
+//     // Validate User Here
+//     // Then generate JWT Token
+  
+//     let jwtSecretKey = process.env.JWT_SECRET_KEY;
+//     let data = {
+//         time: Date(),
+//         userId: 12,
+//     }
+  
+//     const token = jwt.sign(data, jwtSecretKey);
+  
+//     res.send(token);
+// });  
+
+// Generated JWT token verification
+// app.get("/user/validateToken", (req, res) => {
+//     // Tokens are generally passed in the header of the request
+//     // Due to security reasons.
+  
+//     let tokenHeaderKey = process.env.TOKEN_HEADER_KEY;
+//     let jwtSecretKey = process.env.JWT_SECRET_KEY;
+  
+//     try {
+//         const token = req.header(tokenHeaderKey);
+  
+//         const verified = jwt.verify(token, jwtSecretKey);
+//         if(verified){
+//             return res.send("Successfully Verified");
+//         }else{
+//             // Access Denied
+//             return res.status(401).send(error);
+//         }
+//     } catch (error) {
+//         // Access Denied
+//         return res.status(401).send(error);
+//     }
+// });
+
 
 
 module.exports=router;
