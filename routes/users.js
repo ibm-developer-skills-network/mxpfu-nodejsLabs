@@ -25,9 +25,7 @@ let users = [
 
 // GET request: Retrieve all users
 router.get("/",(req,res)=>{
-
   // Copy the code here
-
   res.send("Yet to be implemented")//This line is to be replaced with actual return value
 });
 
