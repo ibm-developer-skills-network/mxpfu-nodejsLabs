@@ -3,41 +3,41 @@ const router = express.Router();
 
 
 let users = [
-    {
-        firstName: "John",
-        lastName: "wick",
-        email:"johnwick@gamil.com",
-        DOB:"22-01-1990",
-    },
-    {
-        firstName: "John",
-        lastName: "smith",
-        email:"johnsmith@gamil.com",
-        DOB:"21-07-1983",
-    },
-    {
-        firstName: "Joyal",
-        lastName: "white",
-        email:"joyalwhite@gamil.com",
-        DOB:"21-03-1989",
-    },
+  {
+    firstName: "John",
+    lastName: "wick",
+    email: "johnwick@gamil.com",
+    DOB: "22-01-1990",
+  },
+  {
+    firstName: "John",
+    lastName: "smith",
+    email: "johnsmith@gamil.com",
+    DOB: "21-07-1983",
+  },
+  {
+    firstName: "Joyal",
+    lastName: "white",
+    email: "joyalwhite@gamil.com",
+    DOB: "21-03-1989",
+  },
 ];
 
 // GET request: Retrieve all users
-router.get("/",(req,res)=>{
+router.get("/", (req, res) => {
   // Copy the code here
-  res.send("Yet to be implemented")//This line is to be replaced with actual return value
+  res.send(users);
 });
 
 // GET by specific ID request: Retrieve a single user with email ID
-router.get("/:email",(req,res)=>{
+router.get("/:email", (req, res) => {
   // Copy the code here
   res.send("Yet to be implemented")//This line is to be replaced with actual return value
 });
 
 
 // POST request: Create a new user
-router.post("/",(req,res)=>{
+router.post("/", (req, res) => {
   // Copy the code here
   res.send("Yet to be implemented")//This line is to be replaced with actual return value
 });
@@ -56,4 +56,4 @@ router.delete("/:email", (req, res) => {
   res.send("Yet to be implemented")//This line is to be replaced with actual return value
 });
 
-module.exports=router;
+module.exports = router;
