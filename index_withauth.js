@@ -6,7 +6,7 @@ const session = require('express-session')
 const app = express();
 const PORT =5000;
 
-app.use(session({secret:"fingerpint",resave: true, saveUninitialized: true}))
+app.use(session({secret:"fingerprint",resave: true, saveUninitialized: true})) //session middleware is used
 
 app.use(express.json());
 
@@ -39,7 +39,7 @@ app.post("/login", (req,res) => {
     }
     let accessToken = jwt.sign({
         data: user
-      }, 'access', { expiresIn: 60 * 60 });
+      }, 'access', { expiresIn: 60 * 60 }); //signifies the session will end in 1 hour(3600 seconds)
 
       req.session.authorization = {
         accessToken
