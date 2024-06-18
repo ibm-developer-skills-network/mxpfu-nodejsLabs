@@ -1,18 +1,12 @@
-// Import the Express library
+// Import Express and user routes, create an instance of Express
 const express = require('express');
-// Import the routes from the users.js file
 const routes = require('./routes/users.js');
-
-// Create an instance of an Express application
 const app = express();
-// Define the port number the server will listen on
 const PORT = 5000;
 
-// Use the express.json middleware to parse JSON request bodies
+// Use JSON parsing middleware and user routes
 app.use(express.json());
-
-// Use the imported routes for handling requests to paths that start with "/user"
 app.use("/user", routes);
 
-// Start the server and listen on the specified port, logging a message when the server is running
+// Start the server and log a message when it's running
 app.listen(PORT, () => console.log("Server is running at port " + PORT));
